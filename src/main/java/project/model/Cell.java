@@ -1,69 +1,58 @@
 package project.model;
 
-import project.init.Initializer;
-import project.model.side.Side;
-
 import java.util.*;
 
-import static project.Constants.G;
+import static project.extensions.Constants.G;
 
-public class Cell implements Initializable {
+public class Cell {
 
-    private final double stepX, stepY;
+    private final List<Point> points;
 
     private final Node center;
-    private final double square;
+    private final double square, stepX, stepY;
 
-    private final HashMap<Side, Side> oppositeSides = new HashMap<>();
+    private final Set<Side> sides;
 
-    public Cell(Side[] sides) {
-        stepX = Vector.create(sides[1].getCenterPoint(), sides[3].getCenterPoint()).length();
-        stepY = Vector.create(sides[0].getCenterPoint(), sides[2].getCenterPoint()).length();
+    public Cell(List<Point> points, Node center, Side bottom, Side right, Side top, Side left) {
+        this.points = points;
 
-        List<Point> points = new ArrayList<>();
-        for (int i = 0; i < sides.length; i++) {
-            Side side = sides[i];
+        this.center = center;
 
-            points.add(side.getPoint1());
-            points.add(side.getPoint2());
+        square = Point.getSquare(points);
 
-            oppositeSides.put(side, sides[(i + 2) % sides.length]);
-        }
+        stepX = Vector.create(left.getCenterPoint(), right.getCenterPoint()).length();
+        stepY = Vector.create(bottom.getCenterPoint(), top.getCenterPoint()).length();
 
-        center = new Node(Geometry.getCenter(points));
-        square = Geometry.getSquare(points);
-
-        for (Side side : sides) {
-            side.addCell(this);
-        }
-    }
-
-    @Override
-    public void init(Initializer initializer) {
-        center.updateValues(initializer.getValuesIn(this));
+        sides = new HashSet<>(Arrays.asList(left, right, bottom, top));
     }
 
     public void updateValues(double tau) {
         Vector w = center.getW();
         double h = center.getH(), u = w.x(), v = w.y(),
-                newH = h - tau / square * oppositeSides.keySet().stream()
-                        .mapToDouble(side -> side.getIntegralH(this))
+                newH = h - tau / square * sides.stream()
+                        .mapToDouble(side -> side.getIntegralH(center))
                         .reduce(0, Double::sum),
-                newU = (u * h - tau / square * oppositeSides.keySet().stream()
-                        .mapToDouble(side -> side.getIntegralWx(this))
+                newU = (u * h - tau / square * sides.stream()
+                        .mapToDouble(side -> side.getIntegralWx(center))
                         .reduce(0, Double::sum)
                 ) / newH,
-                newV = (v * h - tau / square * oppositeSides.keySet().stream()
-                        .mapToDouble(side -> side.getIntegralWy(this))
+                newV = (v * h - tau / square * sides.stream()
+                        .mapToDouble(side -> side.getIntegralWy(center))
                         .reduce(0, Double::sum)
                 ) / newH;
 
-        //if (newH != h || newU != u || newV != v) System.out.println("!");
-        center.updateValues(new Values(newH, new Vector(newU, newV)));
+        setValues(new Values(newH, new Vector(newU, newV)));
+
+        /*if (getCenterPoint().x() == 0.51 && getCenterPoint().y() == 0.51) {
+            System.out.println();
+            System.out.println(center.getOldValues());
+            System.out.println(center.getValues());
+            System.out.println();
+        }*/
     }
 
-    public Side getOppositeSide(Side side) {
-        return oppositeSides.get(side);
+    public void setValues(Values values) {
+        center.updateValues(values);
     }
 
     public double getOptimalTau() {
@@ -75,14 +64,6 @@ public class Cell implements Initializable {
 
     public Point getCenterPoint() {
         return center.getPoint();
-    }
-
-    public Values getOldValues() {
-        return center.getOldValues();
-    }
-
-    public Values getValues() {
-        return center.getValues();
     }
 
     public double getH() {
@@ -99,5 +80,9 @@ public class Cell implements Initializable {
 
     private Vector getW() {
         return center.getW();
+    }
+
+    public List<Point> getPoints() {
+        return points;
     }
 }

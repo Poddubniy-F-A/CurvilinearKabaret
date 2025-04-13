@@ -1,12 +1,10 @@
 package project.init.borders;
 
-import project.init.Initializer;
-import project.model.Cell;
+import project.model.Node;
 import project.model.Values;
 import project.model.Vector;
-import project.model.side.Side;
 
-public class NeutralBordersHandler implements Initializer {
+public class NeutralBordersHandler implements BordersHandler {
 
     private final Values values;
 
@@ -15,12 +13,8 @@ public class NeutralBordersHandler implements Initializer {
     }
 
     @Override
-    public Values getValuesIn(Cell cell) {
-        return values;
-    }
-
-    @Override
-    public Values getValuesIn(Side side) {
-        return values;
+    public void setValuesIn(Node node) {
+        node.updateValues(values);
+        node.updateValues(values);
     }
 }

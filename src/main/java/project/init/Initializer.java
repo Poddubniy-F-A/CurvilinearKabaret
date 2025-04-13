@@ -1,10 +1,10 @@
 package project.init;
 
 import project.model.Cell;
-import project.model.Values;
-import project.model.side.Side;
+import project.model.Side;
 
 public interface Initializer {
-    Values getValuesIn(Side side);
-    Values getValuesIn(Cell cell);
+
+    void initValuesIn(Cell cell);
+    void initValuesIn(Side side);
 }

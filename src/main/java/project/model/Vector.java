@@ -30,7 +30,7 @@ public record Vector(double x, double y, double length) {
         return new Vector(x / length, y / length);
     }
 
-    public Vector getInverse() {
+    public Vector getInverted() {
         return new Vector(-x, -y);
     }
 }

@@ -4,6 +4,8 @@ public class Node {
     private final Point point;
     private Values oldValues, values;
 
+    private boolean wasUpdated = false;
+
     public Node(Point point) {
         this.point = point;
     }
@@ -11,6 +13,12 @@ public class Node {
     public void updateValues(Values newValues) {
         oldValues = values;
         values = newValues;
+
+        wasUpdated = true;
+    }
+
+    public void setAsNotUpdated() {
+        wasUpdated = false;
     }
 
     public Point getPoint() {
@@ -19,6 +27,10 @@ public class Node {
 
     public Values getOldValues() {
         return oldValues;
+    }
+
+    public Values getNotUpdatedValues() {
+        return wasUpdated ? oldValues : values;
     }
 
     public Values getValues() {

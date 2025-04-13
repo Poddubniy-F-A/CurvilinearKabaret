@@ -4,7 +4,7 @@ import project.model.Point;
 import project.model.Values;
 import project.model.Vector;
 
-import static project.Constants.*;
+import static project.extensions.Constants.*;
 
 public class VortexInitialConditions implements InitialConditions {
     private final double x0, y0, r0, h0;

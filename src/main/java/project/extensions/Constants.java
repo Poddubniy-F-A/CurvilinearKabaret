@@ -1,4 +1,4 @@
-package project;
+package project.extensions;
 
 public class Constants {
     public static double G = 1;

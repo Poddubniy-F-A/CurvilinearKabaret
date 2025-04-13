@@ -1,4 +1,4 @@
-package project.model.side;
+package project.model.extrapolation;
 
 import project.model.Values;
 

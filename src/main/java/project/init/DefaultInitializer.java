@@ -2,8 +2,7 @@ package project.init;
 
 import project.init.conditions.InitialConditions;
 import project.model.Cell;
-import project.model.Values;
-import project.model.side.Side;
+import project.model.Side;
 
 public class DefaultInitializer implements Initializer {
     private final InitialConditions initialConditions;
@@ -13,12 +12,12 @@ public class DefaultInitializer implements Initializer {
     }
 
     @Override
-    public Values getValuesIn(Side side) {
-        return initialConditions.getValuesIn(side.getCenterPoint());
+    public void initValuesIn(Cell cell) {
+        cell.setValues(initialConditions.getValuesIn(cell.getCenterPoint()));
     }
 
     @Override
-    public Values getValuesIn(Cell cell) {
-        return initialConditions.getValuesIn(cell.getCenterPoint());
+    public void initValuesIn(Side side) {
+        side.setValues(initialConditions.getValuesIn(side.getCenterPoint()));
     }
 }

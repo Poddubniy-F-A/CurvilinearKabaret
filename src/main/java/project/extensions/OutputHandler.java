@@ -1,4 +1,4 @@
-package project;
+package project.extensions;
 
 import com.opencsv.CSVWriter;
 import project.model.Cell;
@@ -16,10 +16,6 @@ public class OutputHandler implements AutoCloseable {
             outputH = "outputH.csv", outputU = "outputU.csv", outputV = "outputV.csv",
             outputHLimits = "h.csv",
             config = "config.csv";
-
-    private static String[] getStringArrayFrom(double[] array) {
-        return Arrays.stream(array).mapToObj(String::valueOf).toArray(String[]::new);
-    }
 
     private final CSVWriter hWriter, uWriter, vWriter, hLimitsWriter;
     private final Cell[][] cells;
@@ -62,6 +58,11 @@ public class OutputHandler implements AutoCloseable {
         writeValuesBy(hWriter, Cell::getH);
         writeValuesBy(uWriter, Cell::getU);
         writeValuesBy(vWriter, Cell::getV);
+
+        hLimitsWriter.writeNext(new String[]{
+                String.valueOf(Arrays.stream(cells).mapToDouble(cellsSlice -> Arrays.stream(cellsSlice).mapToDouble(Cell::getH).min().orElseThrow()).min().orElseThrow()),
+                String.valueOf(Arrays.stream(cells).mapToDouble(cellsSlice -> Arrays.stream(cellsSlice).mapToDouble(Cell::getH).max().orElseThrow()).max().orElseThrow())
+        });
     }
 
     private void writeValuesBy(CSVWriter writer, ToDoubleFunction<Cell> function) {

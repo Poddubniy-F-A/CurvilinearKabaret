@@ -5,14 +5,16 @@ import project.model.Values;
 import project.model.Vector;
 
 public class ConstantInitialConditions implements InitialConditions {
-    private final double h0;
+    private final double h0, u0, v0;
 
-    public ConstantInitialConditions(double h0) {
-        this.h0 = h0;
+    public ConstantInitialConditions(double h, double u, double v) {
+        h0 = h;
+        u0 = u;
+        v0 = v;
     }
 
     @Override
     public Values getValuesIn(Point point) {
-        return new Values(h0, new Vector(0, 0));
+        return new Values(h0, new Vector(u0, v0));
     }
 }
