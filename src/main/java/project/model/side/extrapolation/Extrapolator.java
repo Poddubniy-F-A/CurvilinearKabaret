@@ -1,6 +1,6 @@
-package project.model.extrapolation;
+package project.model.side.extrapolation;
 
-import project.model.Node;
+import project.model.node.Node;
 import project.model.Vector;
 
 import static java.lang.Math.*;

@@ -1,9 +1,9 @@
 package project.init;
 
 import project.init.conditions.InitialConditions;
-import project.model.Cell;
-import project.model.Side;
-import project.model.Values;
+import project.model.cell.Cell;
+import project.model.side.Side;
+import project.model.node.Values;
 
 public class CentersOrientedInitializer implements Initializer {
 

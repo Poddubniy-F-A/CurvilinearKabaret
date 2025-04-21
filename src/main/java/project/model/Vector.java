@@ -1,5 +1,7 @@
 package project.model;
 
+import project.model.node.Point;
+
 public record Vector(double x, double y, double length) {
 
     public static Vector create(Point start, Point end) {

@@ -1,8 +1,8 @@
 package project.init;
 
 import project.init.conditions.InitialConditions;
-import project.model.Cell;
-import project.model.Side;
+import project.model.cell.Cell;
+import project.model.side.Side;
 
 public class DefaultInitializer implements Initializer {
     private final InitialConditions initialConditions;

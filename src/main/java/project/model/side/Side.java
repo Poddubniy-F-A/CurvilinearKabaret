@@ -1,8 +1,12 @@
-package project.model;
+package project.model.side;
 
 import project.extensions.Constants;
-import project.model.extrapolation.ExtrapolationProperties;
-import project.model.extrapolation.Extrapolator;
+import project.model.Vector;
+import project.model.side.extrapolation.ExtrapolationProperties;
+import project.model.side.extrapolation.Extrapolator;
+import project.model.node.Node;
+import project.model.node.Point;
+import project.model.node.Values;
 
 import java.util.HashMap;
 

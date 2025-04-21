@@ -1,4 +1,4 @@
-package project.model.extrapolation;
+package project.model.side.extrapolation;
 
 @FunctionalInterface
 public interface EigenValue {

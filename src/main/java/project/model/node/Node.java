@@ -1,4 +1,6 @@
-package project.model;
+package project.model.node;
+
+import project.model.Vector;
 
 public class Node {
     private final Point point;

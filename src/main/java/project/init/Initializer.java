@@ -1,7 +1,7 @@
 package project.init;
 
-import project.model.Cell;
-import project.model.Side;
+import project.model.cell.Cell;
+import project.model.side.Side;
 
 public interface Initializer {
 

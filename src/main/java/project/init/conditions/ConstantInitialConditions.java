@@ -1,7 +1,7 @@
 package project.init.conditions;
 
-import project.model.Point;
-import project.model.Values;
+import project.model.node.Point;
+import project.model.node.Values;
 import project.model.Vector;
 
 public class ConstantInitialConditions implements InitialConditions {

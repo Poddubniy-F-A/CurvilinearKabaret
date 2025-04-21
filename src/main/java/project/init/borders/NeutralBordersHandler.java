@@ -1,7 +1,7 @@
 package project.init.borders;
 
-import project.model.Node;
-import project.model.Values;
+import project.model.node.Node;
+import project.model.node.Values;
 import project.model.Vector;
 
 public class NeutralBordersHandler implements BordersHandler {

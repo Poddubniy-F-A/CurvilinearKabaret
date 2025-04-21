@@ -1,4 +1,6 @@
-package project.model;
+package project.model.node;
+
+import project.model.Vector;
 
 public record Values(double h, Vector w) {
 

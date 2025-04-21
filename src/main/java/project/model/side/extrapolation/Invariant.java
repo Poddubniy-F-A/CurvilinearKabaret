@@ -1,6 +1,6 @@
-package project.model.extrapolation;
+package project.model.side.extrapolation;
 
-import project.model.Values;
+import project.model.node.Values;
 
 @FunctionalInterface
 public interface Invariant {

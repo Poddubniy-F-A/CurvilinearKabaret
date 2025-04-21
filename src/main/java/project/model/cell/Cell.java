@@ -1,4 +1,10 @@
-package project.model;
+package project.model.cell;
+
+import project.model.node.Node;
+import project.model.node.Point;
+import project.model.side.Side;
+import project.model.node.Values;
+import project.model.Vector;
 
 import java.util.*;
 
@@ -20,14 +26,14 @@ public class Cell {
 
         square = Point.getSquare(points);
 
-        stepX = Vector.create(left.getCenterPoint(), right.getCenterPoint()).length();
-        stepY = Vector.create(bottom.getCenterPoint(), top.getCenterPoint()).length();
+        stepX = project.model.Vector.create(left.getCenterPoint(), right.getCenterPoint()).length();
+        stepY = project.model.Vector.create(bottom.getCenterPoint(), top.getCenterPoint()).length();
 
         sides = new HashSet<>(Arrays.asList(left, right, bottom, top));
     }
 
     public void updateValues(double tau) {
-        Vector w = center.getW();
+        project.model.Vector w = center.getW();
         double h = center.getH(), u = w.x(), v = w.y(),
                 newH = h - tau / square * sides.stream()
                         .mapToDouble(side -> side.getIntegralH(center))
@@ -41,7 +47,7 @@ public class Cell {
                         .reduce(0, Double::sum)
                 ) / newH;
 
-        setValues(new Values(newH, new Vector(newU, newV)));
+        setValues(new Values(newH, new project.model.Vector(newU, newV)));
 
         /*if (getCenterPoint().x() == 0.51 && getCenterPoint().y() == 0.51) {
             System.out.println();

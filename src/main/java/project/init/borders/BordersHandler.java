@@ -1,6 +1,6 @@
 package project.init.borders;
 
-import project.model.Node;
+import project.model.node.Node;
 
 public interface BordersHandler {
 

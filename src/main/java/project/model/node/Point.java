@@ -1,4 +1,4 @@
-package project.model;
+package project.model.node;
 
 import java.util.List;
 
